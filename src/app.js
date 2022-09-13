@@ -1,17 +1,19 @@
 const express = require('express');
 const cors = require('cors');
-const { port } = require('./config/Config');
-require('./config/MongoConfig');
+const { port } = require('./config/config');
+const { mongoConnect } = require('./config/mongoConfig');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+
+mongoConnect();
 app.listen(port, () => {
     console.log(`Listo por el puerto ${ port}`);
 });
 
-//enpoint de prueba
+//rutas
 let respuesta = {
     error: true,
     codigo: 200,
@@ -26,3 +28,5 @@ app.get('/', (req, res) => {
     }
     res.send(respuesta).status(respuesta.codigo);
 });
+
+app.use('/api/v1', require('./v1/routes'));
