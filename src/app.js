@@ -2,13 +2,16 @@ const express = require('express');
 const cors = require('cors');
 const { port } = require('./config/config');
 const { mongoConnect } = require('./config/mongoConfig');
+const { createRoles, createInicialAdmin } = require('./libs/initialSetup');
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
-
-
 mongoConnect();
+createRoles();
+createInicialAdmin();
+
 app.listen(port, () => {
     console.log(`Listo por el puerto ${ port}`);
 });
