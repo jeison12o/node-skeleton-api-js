@@ -1,21 +1,35 @@
-const deleteUser = async (req, res ) => {
+const userService = require('../services/user.services');
 
+const deleteUser = async (req, res ) => {
+    try {
+        
+    } catch (error) {
+        
+    }
 }
 
 const getAllUsers = async (req, res ) => {
-
+    try {
+        
+    } catch (error) {
+        
+    }
 }
 
 const getUserId = async (req, res ) => {
-
+    try {
+        
+    } catch (error) {
+        
+    }
 }
 
-const getUserEmail = async (req, res ) => {
-
+const putUser = async (req, res ) => {
+    try {
+        
+    } catch (error) {
+        
+    }
 }
 
-const updateUser = async (req, res ) => {
-
-}
-
-module.exports = { deleteUser, getAllUsers, getUserId, getUserEmail, updateUser };
+module.exports = { deleteUser, getAllUsers, getUserId, putUser };
