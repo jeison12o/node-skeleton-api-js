@@ -5,26 +5,31 @@ const getUsers = async () => {
     return responseUser;
 }
 
-const getOneUserId = async (id) => {
+const getOneUserById = async (id) => {
     const responseUser = await userModel.findOne({ _id: id});
     return responseUser;
 }
 
-const getOneUserEmail = async (email) => {
+const getOneUserByEmail = async (email) => {
     const responseUser = await userModel.findOne({ email: email });
     return responseUser;
 }
 
-const insertOneUser = async (email) => {
-    
+const insertOneUser = async (newUser) => {
+    const responseUser = await userModel.create(newUser);
+    return responseUser;
 }
 
-const updateOneUser = async (email) => {
-    
+const updateOneUser = async (id, user) => {
+    const responseUser = await userModel.findOneAndUpdate({ _id: id}, user, {
+        new:true,
+    });
+    return responseUser;
 }
 
-const deleteOneUser = async (email) => {
-    
+const deleteOneUser = async (id) => {
+    const responseUser = await userModel.remove({ _id: id});
+    return responseUser;
 }
 
-module.exports = { getUsers, getOneUserId, getOneUserEmail, insertOneUser, updateOneUser, deleteOneUser };
+module.exports = { getUsers, getOneUserById, getOneUserByEmail, insertOneUser, updateOneUser, deleteOneUser };
