@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const ROLES = ['user','admin'];
 
 const RoleSchema = new mongoose.Schema(

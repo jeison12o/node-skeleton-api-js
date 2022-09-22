@@ -21,7 +21,9 @@ const getAllUsers = async (req, res ) => {
 
 const getUserId = async (req, res ) => {
     try {
-        
+        const { id } = req.params;
+        const response = await userService.getOneUserById(id);
+        res.send(response);
     } catch (error) {
         
     }
@@ -29,7 +31,10 @@ const getUserId = async (req, res ) => {
 
 const putUser = async (req, res ) => {
     try {
-        
+        const { id } = req.params;
+        const { name, age, password } = req.body;
+        const response = await userService.updateOneUser(id, {name, age, password});
+        res.send(response);
     } catch (error) {
         
     }

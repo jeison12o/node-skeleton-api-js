@@ -1,10 +1,10 @@
-const role = require('../models/Role');
-const user = require('../models/User');
+const roleService = require('../services/role.services');
+const userService = require('../services/user.services');
 const { encrypt } = require('../helpers/handleBcrypt');
 
 const createRoles = async () => {
     try {
-        const count = await role.estimatedDocumentCount();
+        const count = await roleService.getCountAll();
         if(count > 0) return;
         const values = await Promise.all([
             new Role({name: "user"}).save(),
@@ -17,9 +17,12 @@ const createRoles = async () => {
 };
 
 const createInicialAdmin = async () => {
-    const userAdmin = await user.findOne({ email: "admin@gmail.com"});
-    const roles = await role.find({name: { $in: ["admin"]}});
-    if(userAdmin) return;
+    const userAdmin = await userService.getOneUserByEmail('admin@gmail.com');
+    const roles = await roleService.getByArrayName(["admin"]);
+    if(userAdmin){
+        console.log('admin is already created');
+        return;
+    } 
     await user.create({
         name: "admin",
         age: 24,
