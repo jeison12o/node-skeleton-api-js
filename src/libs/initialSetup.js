@@ -22,14 +22,16 @@ const createInicialAdmin = async () => {
     if(userAdmin){
         console.log('admin is already created');
         return;
-    } 
-    await user.create({
+    }
+
+    const admin = {
         name: "admin",
         age: 24,
         email: "admin@gmail.com",
         password: await encrypt('admin'),
-        roles: roles.map((role) => { role._id}),
-    });
+        roles: roles.map((role) => role._id),
+    }
+    await userService.insertOneUser(admin);
     console.log('inicial admin created!');
 };
 

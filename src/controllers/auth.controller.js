@@ -2,7 +2,7 @@ const userService = require('../services/user.services');
 const roleService = require('../services/role.services');
 const { encrypt, verifyPassword } = require('../helpers/handleBcrypt');
 
-const signUp = async (req, res ) => {
+const signIn = async (req, res ) => {
     try {
         const { email, password } = req.body;
         const user = await userService.getOneUserByEmail(email);
@@ -18,12 +18,18 @@ const signUp = async (req, res ) => {
             res.send({error: 'Invalid password'});
             return;
         }
+
+        if(checkPassword){
+            res.status(200);
+            res.send({data: user});
+            return;
+        }
     } catch (error) {
         
     }
 }
 
-const signIn = async (req, res) => {
+const signUp = async (req, res) => {
     try {
         const { name, email, age, password, roles } = req.body;
         const passwordHash = await encrypt(password);
@@ -33,7 +39,7 @@ const signIn = async (req, res) => {
             email,
             age,
             password: passwordHash,
-            roles: rolesId.map((role) => { role._id}),
+            roles: rolesId.map((role) =>  role._id),
         };
         const response = await userService.insertOneUser(newUser);
         res.send({data: response});
