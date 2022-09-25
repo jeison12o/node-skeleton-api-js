@@ -1,3 +1,3 @@
-const { checkDuplicateEmail } = require('./verifysignUp');
+const { checkDuplicateEmail, checkRoleExisted } = require('./verifysignUp');
 
-module.exports = { checkDuplicateEmail };
+module.exports = { checkDuplicateEmail, checkRoleExisted};

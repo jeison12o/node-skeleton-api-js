@@ -1,6 +1,7 @@
 const userService = require('../services/user.services');
 const roleService = require('../services/role.services');
 const { encrypt, verifyPassword } = require('../helpers/handleBcrypt');
+const { tokenSign } = require('../helpers/generateJwt');
 
 const signIn = async (req, res ) => {
     try {
@@ -20,8 +21,12 @@ const signIn = async (req, res ) => {
         }
 
         if(checkPassword){
+            const tokenJwt = await tokenSign(user);
             res.status(200);
-            res.send({data: user});
+            res.send({
+                token: tokenJwt,
+                data: user
+            });
             return;
         }
     } catch (error) {
@@ -42,7 +47,11 @@ const signUp = async (req, res) => {
             roles: rolesId.map((role) =>  role._id),
         };
         const response = await userService.insertOneUser(newUser);
-        res.send({data: response});
+        const tokenJwt = await tokenSign(response);
+        res.send({
+            token: tokenJwt,
+            data: response
+        });
     } catch (error) {
         
     }

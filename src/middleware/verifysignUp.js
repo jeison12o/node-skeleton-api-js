@@ -22,4 +22,4 @@ const checkRoleExisted = async (req, res, next) => {
     next();
 }
 
-module.exports = { checkDuplicateEmail };
+module.exports = { checkDuplicateEmail, checkRoleExisted };
