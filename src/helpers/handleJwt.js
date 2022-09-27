@@ -14,4 +14,16 @@ const tokenSign = async (user) => {
     );
 };
 
-module.exports = { tokenSign }
+const verifyToken = async (token) => {
+    try {
+        return jwt.verify(token, jwt_secret);
+    } catch (error) {
+        return null;
+    }
+}
+
+const decodeSign = async (token) => {
+    return jwt.decode(token, null);
+}
+
+module.exports = { tokenSign, verifyToken, decodeSign };

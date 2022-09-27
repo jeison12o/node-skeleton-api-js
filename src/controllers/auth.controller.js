@@ -1,7 +1,7 @@
 const userService = require('../services/user.services');
 const roleService = require('../services/role.services');
 const { encrypt, verifyPassword } = require('../helpers/handleBcrypt');
-const { tokenSign } = require('../helpers/generateJwt');
+const { tokenSign } = require('../helpers/handleJwt');
 
 const signIn = async (req, res ) => {
     try {

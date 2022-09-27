@@ -10,4 +10,9 @@ const getByArrayName = async (arrayName) => {
     return roles;
 }
 
-module.exports = { getCountAll, getByArrayName };
+const getByArrayId = async (arrayId) => {
+    const roles = await roleModel.find({_id: { $in: arrayId}});
+    return roles;
+}
+
+module.exports = { getCountAll, getByArrayName, getByArrayId };
