@@ -1,3 +1,4 @@
+const Role = require('../models/Role');
 const roleService = require('../services/role.services');
 const userService = require('../services/user.services');
 const { encrypt } = require('../helpers/handleBcrypt');
@@ -5,6 +6,7 @@ const { encrypt } = require('../helpers/handleBcrypt');
 const createRoles = async () => {
     try {
         const count = await roleService.getCountAll();
+        console.log(`${count} roles`);
         if(count > 0) return;
         const values = await Promise.all([
             new Role({name: "user"}).save(),
